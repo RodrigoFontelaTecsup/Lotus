@@ -11,6 +11,12 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        <div class="text-center">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                            style="width: 185px;" alt="logo">
+                            <h4 class="mt-1 mb-5 pb-1"><b>We are The Lotus Team</b></h4>
+                        </div>
+
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 

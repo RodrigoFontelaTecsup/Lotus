@@ -48,7 +48,7 @@
                         <div class="col">
                             <div class="card shadow-sm">
                                 <img height="450" src="/foto/{{ $foto->ruta }}" alt="Imagen">
-                                <div class="card-body">
+                                <div style="font-size:1.4em;" class="card-body">
                                     <p class="card-text">Autor: {{ $foto->autor }}</p>
                                     <p class="card-text">Nombre del libro: {{ $foto->nomlibro }}</p>
                                     <p class="card-text">Descripcion: {{ $foto->descripcion }}</p>

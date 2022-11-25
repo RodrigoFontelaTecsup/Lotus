@@ -35,6 +35,9 @@ class FotoController extends Controller
             $foto = new Foto;
             $foto->user_id = $id;
             $foto->descripcion = $request->descripcion;
+            $foto->autor = $request->autor;
+            $foto->nomlibro = $request->nomlibro;
+            $foto->rutadescarga = $request->rutadescarga;
             $foto->estado = 1;
             $foto->ruta = $fileName;
             $foto->save();
@@ -63,5 +66,10 @@ class FotoController extends Controller
             $comentario->save();
             return redirect('/home');
         }
+    }
+    public function solicitarLibro(Request $request)
+    {
+        //
+        return view('/', 'resources/views/solicitar');
     }
 }

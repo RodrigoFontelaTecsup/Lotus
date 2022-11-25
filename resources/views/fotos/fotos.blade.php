@@ -21,14 +21,31 @@
         <div class="container">
             <form action="{{ route('subirFoto') }}" method="POST" enctype="multipart/form-data" class="row g-3">
                 @csrf
-                <label for="staticEmail2">Subir Una foto</label>
+                <label for="staticEmail2">Subir libro</label>
+                {{-- Autor --}}
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Autor</label>
+                    <input type="text" class="form-control" name="autor" placeholder="Ingrese el nombre del Autor">
+                </div>
+                {{-- Nombre del libro --}}
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nombre del libro</label>
+                    <input type="text" class="form-control" name="nomlibro" placeholder="Ingrese el nombre del libro">
+                </div>
+                {{-- Ruta de descarga --}}
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Ruta de descarga</label>
+                    <input type="text" class="form-control" name="rutadescarga" placeholder="Link para descargar libro">
+                </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
                     <input type="text" class="form-control" name="descripcion" placeholder="Agregue una descripcion">
                 </div>
+                {{-- Subir Portada --}}
                 <div class="col-auto">
                     <input class="form-control" type="file" name="foto">
                 </div>
+                {{-- Boton para subir los datos  --}}
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary mb-3">Subir</button>
                 </div>
@@ -37,15 +54,20 @@
                 @foreach($fotos as $foto)
                 <div class="col">
                     <div class="card shadow-sm">
-                        <img height="200" src="/foto/{{$foto->ruta}}" alt="Imagen">
+                        <img height="450" src="/foto/{{$foto->ruta}}" alt="Imagen">
                         <div class="card-body">
-                            <p class="card-text">{{$foto->descripcion}}</p>
+                            <p class="card-text">Autor: {{$foto->autor}}</p>
+                            <p class="card-text">Nombre del libro: {{$foto->nomlibro}}</p>
+                            <p class="card-text">Descripcion: {{$foto->descripcion}}</p>                            
+                            <a href="{{$foto->rutadescarga}}"
+                            class="btn btn-primary" target="_blank">Descargar libro(pdf)</a> 
                             <div class="d-flex justify-content-between align-items-center">
                                 <form method="POST" action="{{ route('eliminarFoto') }}">
                                     @csrf
+                                    <br>
                                     <div class="btn-group">
                                         <input type="hidden" name="id_foto" value="{{$foto->id}}">
-                                        <button type="submit" class="btn btn-sm btn-outline-secondary">Eliminar</button>
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
                                     </div>
                                 </form>
                                 <small class="text-muted">{{$foto->created_at}}</small>

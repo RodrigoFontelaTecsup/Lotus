@@ -1,7 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+<main>
     <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
         .valoracion {
             position: relative;
             overflow: hidden;
@@ -26,290 +41,77 @@
             color: #ffff00;
         }
     </style>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h2>{{ __('Nuestros libros 😍') }}</h2>
-                    </div>
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @foreach($fotos as $foto)
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img height="450" src="/foto/{{$foto->ruta}}" alt="Imagen">
+                        <div class="card-body">
+                            <p class="card-text">Autor: {{$foto->autor}}</p>
+                            <p class="card-text">Nombre del libro: {{$foto->nomlibro}}</p>
+                            <p class="card-text">Descripcion: {{$foto->descripcion}}</p>
+                            <div class="valoracion">
+                                <input id="radio1" type="radio" name="estrellas" value="5">
+                                <label for="radio1">★</label>
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                                <input id="radio2" type="radio" name="estrellas" value="4">
+                                <label for="radio2">★</label>
+
+                                <input id="radio3" type="radio" name="estrellas" value="3">
+                                <label for="radio3">★</label>
+
+                                <input id="radio4" type="radio" name="estrellas" value="2">
+                                <label for="radio4">★</label>
+
+                                <input id="radio5" type="radio" name="estrellas" value="1">
+                                <label for="radio5">★</label>
                             </div>
-                        @endif
-
-                        <b>
-                            <h3>{{ __('Bienvenido a Lotus!') }}</h3>
-                        </b>
-                        <br>
-                        <!-- Primer grupo de cartas -->
-                        <div class="card-group">
-                            <div class="card">
-                                <img src="https://cosmobook.pe/wp-content/uploads/2022/07/8938e3868a3a64298f347667f27eb5ad.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
-                                    </div>
+                            <br>
+                            <a href="{{$foto->rutadescarga}}" class="btn btn-success" target="_blank">Descargar libro(pdf)</a>                                
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <p> <i class="bi bi-chat-dots"></i>
+                                        <button class="btn " type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{$foto->id}}" aria-expanded="false" aria-controls="collapseExample">
+                                            <x-bi-chat class="text-primary" /> {{count($foto->comentario)}}
+                                        </button>
+                                    </p>
                                 </div>
+                                <small class="text-muted">{{$foto->User->name}}</small>
                             </div>
-                            <div class="card">
-                                <img src="https://www.alianzaeditorial.es/imagenes/libros/grande/9788420651361-la-metamorfosis.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
-                                    </div>
+                            <div class="collapse" id="collapseExample{{$foto->id}}">
+                                @foreach($foto->comentario as $comentario)
+                                <div class="card card-body">
+                                    {{$comentario->comentario}}
                                 </div>
-                            </div>
-                            <div class="card">
-                                <img src="https://www.alianzaeditorial.es/imagenes/libros/grande/9788420651361-la-metamorfosis.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
+                                <small class="text-muted">{{$comentario->User->name}}</small>
+                                @endforeach
+                                <form method="POST" action="{{ route('subirComentario') }}" >
+                                @csrf
+                                    <div class="form-group">
+                                        <div class="mt-2 row g-3">
+                                            <div class="col-9">
+                                                <input type="text" class="form-control" name="comentario" aria-describedby="emailHelp" placeholder="Ingrese su comentario">
+                                            </div>
+                                            <div class="col-2">
+                                            <input type="hidden" name="id_foto" value="{{$foto->id}}">
+                                                <button type="submit" class="btn btn-info">
+                                                    <x-bi-send />
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+
+                                </form>
                             </div>
                         </div>
-                        <!-- Segundo grupo de cartas -->
-                        <div class="card-group">
-                            <div class="card">
-                                <img src="https://cosmobook.pe/wp-content/uploads/2022/07/8938e3868a3a64298f347667f27eb5ad.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="https://www.alianzaeditorial.es/imagenes/libros/grande/9788420651361-la-metamorfosis.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="https://www.alianzaeditorial.es/imagenes/libros/grande/9788420651361-la-metamorfosis.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tercer grupo de cartas -->
-                        <div class="card-group">
-                            <div class="card">
-                                <img src="https://cosmobook.pe/wp-content/uploads/2022/07/8938e3868a3a64298f347667f27eb5ad.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="https://www.alianzaeditorial.es/imagenes/libros/grande/9788420651361-la-metamorfosis.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <img src="https://www.alianzaeditorial.es/imagenes/libros/grande/9788420651361-la-metamorfosis.jpg"
-                                    class="card-img-top" alt=".img">
-                                <div class="card-body">
-                                    <h5 class="card-title">Titulo: Cura Mortal</h5>
-                                    <h5 class="card-title">Autor: James Dashner</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the
-                                        bulk of the card's content.</p>
-                                    <a href="https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxwb3J0YWZvbGlvcHJvZnlhZmlyfGd4OjJjNGFiOWFjYTJjODIwNjE"
-                                        class="btn btn-primary" target="_blank">Libro-completo(pdf)</a>
-                                    <div class="valoracion">
-                                        <input id="radio1" type="radio" name="estrellas" value="5">
-                                        <label for="radio1">★</label>
-
-                                        <input id="radio2" type="radio" name="estrellas" value="4">
-                                        <label for="radio2">★</label>
-
-                                        <input id="radio3" type="radio" name="estrellas" value="3">
-                                        <label for="radio3">★</label>
-
-                                        <input id="radio4" type="radio" name="estrellas" value="2">
-                                        <label for="radio4">★</label>
-
-                                        <input id="radio5" type="radio" name="estrellas" value="1">
-                                        <label for="radio5">★</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Cuarto grupo de cartas -->
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
+
+</main>
 @endsection

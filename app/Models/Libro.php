@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comentario extends Model
+class Libro extends Model
 {
     use HasFactory;
-    public function Foto(){
-        return $this->belongsTo(Foto::class);
-    }
-    // public function Libro(){
-    //     return $this->belongsTo(Libro::class);
-    // }
     public function User(){
         return $this->belongsTo(User::class);
+    }
+    public function Comentario(){
+        return $this->hasMany(Comentario::class);
     }
 }

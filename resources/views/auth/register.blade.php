@@ -5,15 +5,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <div style="font-size: 30px;" class="card-header">{{ __('Register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form style="font-size: 20px" method="POST" action="{{ route('register') }}">
                             @csrf
 
                             <div class="text-center">
                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                                    style="width: 185px;" alt="logo">
+                                    style="width: 400px;" alt="logo">
                                 <h4 class="mt-1 mb-5 pb-1"><b>We are The Lotus Team</b></h4>
                             </div>
 
@@ -80,7 +80,8 @@
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn"
+                                        style="color: #191b1c;background: #0099CC;border: 4px solid #191b1c;border-radius: 6px;font-size:20px;font-weight:600;">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
